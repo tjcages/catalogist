@@ -3,114 +3,246 @@
 .main {
   position: relative;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding: $padding-150 $padding-200;
-
-  color: $color-100;
-  border: none;
-  border-radius: $border-radius-300;
-
-  cursor: pointer;
-
   &:hover {
-    &.apple {
-      &:before {
-        opacity: 1;
-        background-image: radial-gradient(
-          $color-apple-secondary 0.5px,
-          $color-apple 0.5px
-        );
+    .arrows {
+      opacity: 1;
+    }
+  }
+
+  .button {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: $padding-150 $padding-200;
+
+    color: $color-100;
+    border: none;
+    border-radius: $border-radius-300;
+    overflow: hidden;
+
+    cursor: pointer;
+
+    &:hover {
+      /* &.apple {
+        &:before {
+          opacity: 1;
+          background-image: radial-gradient(
+            $color-apple-secondary 0.5px,
+            $color-apple 0.5px
+          );
+        }
+      }
+      &.spotify {
+        &:before {
+          opacity: 1;
+          background-image: radial-gradient(
+            $color-spotify-secondary 0.5px,
+            $color-spotify 0.5px
+          );
+        }
+      } */
+
+      .background {
+        transform: scale(1);
+      }
+      .title {
+        color: $color-100;
       }
     }
-    &.spotify {
-      &:before {
-        opacity: 1;
-        background-image: radial-gradient(
-          $color-spotify-secondary 0.5px,
-          $color-spotify 0.5px
-        );
-      }
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 2.5px;
+      left: 2.5px;
+      right: 2.5px;
+      bottom: 2.5px;
+
+      background-color: $color-200;
+      border-radius: $border-radius-300 - 2.5px;
+      background-size: 5px 5px;
+      opacity: 0.5;
+
+      user-select: none;
+      pointer-events: none;
+
+      transition: opacity $animation-duration-short $animation-easing,
+        background-image $animation-duration-short $animation-easing
+          $animation-duration-long;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      border: 1.5px solid $color-100;
+      border-radius: $border-radius-300;
+
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .background {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+
+      transform: scale(0);
+      transition: transform $animation-duration-long $animation-easing;
     }
 
     .title {
-      color: $color-100;
+      position: relative;
+
+      font-size: $font-size-200;
+      font-weight: $font-weight-300;
+      line-height: 1em;
+
+      transition: color $animation-duration $animation-easing;
     }
   }
 
-  &:before {
-    content: "";
+  .arrows {
     position: absolute;
-    top: 2.5px;
-    left: 2.5px;
-    right: 2.5px;
-    bottom: 2.5px;
+    top: $padding-100;
+    bottom: $padding-100;
 
-    background-color: $color-200;
-    border-radius: $border-radius-300 - 2.5px;
-    background-size: 5px 5px;
-    opacity: 0.5;
+    width: $padding-400;
 
-    user-select: none;
-    pointer-events: none;
+    --color: $color-100;
+    opacity: 0;
 
-    transition: opacity $animation-duration-short $animation-easing,
-      background-image $animation-duration-short $animation-easing;
-  }
+    transition: opacity $animation-duration $animation-easing
+      $animation-duration;
 
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    .arrow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
 
-    border: 1.5px solid $color-100;
-    border-radius: $border-radius-300;
+      @mixin absolute {
+        content: "";
+        position: absolute;
+        left: 0;
 
-    user-select: none;
-    pointer-events: none;
+        width: 10%;
+        height: 65%;
+
+        background-color: var(--color);
+        border-radius: $padding-200;
+      }
+
+      &:before {
+        @include absolute;
+        top: 0;
+        transform: rotate(-45deg);
+      }
+
+      &:after {
+        @include absolute;
+        bottom: 0;
+        transform: rotate(45deg);
+      }
+
+      // animate each arrow to the right and fade out repeatidly
+      // delay each arrow by 0.2s
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          animation: arrow $animation-duration-long infinite;
+          animation-delay: $animation-duration-short * $i;
+        }
+      }
+
+      @keyframes arrow {
+        0% {
+          left: 0;
+          opacity: 1;
+        }
+        50% {
+          left: 100%;
+          opacity: 0;
+        }
+        100% {
+          left: 100%;
+          opacity: 0;
+        }
+      }
+    }
   }
 
   &.apple {
-    color: $color-apple;
+    .button {
+      color: $color-apple;
 
-    &:before {
-      background-color: $color-apple;
-      background-image: radial-gradient(
-        $color-apple-secondary 0.5px,
-        #feebee 0.5px
-      );
+      &:before {
+        background-color: $color-apple;
+        background-image: radial-gradient(
+          $color-apple-secondary 0.5px,
+          #feebee 0.5px
+        );
+      }
+      &:after {
+        border-color: $color-apple;
+      }
+
+      .background {
+        background-color: $color-apple;
+        transform-origin: left;
+      }
     }
-    &:after {
-      border-color: $color-apple;
+
+    .arrows {
+      left: 100%;
+
+      .arrow {
+        &:before,
+        &:after {
+          background-color: $color-apple;
+        }
+      }
     }
   }
 
   &.spotify {
-    color: $color-spotify;
+    .button {
+      color: $color-spotify;
 
-    &:before {
-      background-color: $color-spotify;
-      background-image: radial-gradient(
-        $color-spotify-secondary 0.5px,
-        #dcf9e6 0.5px
-      );
+      &:before {
+        background-color: $color-spotify;
+        background-image: radial-gradient(
+          $color-spotify-secondary 0.5px,
+          #dcf9e6 0.5px
+        );
+      }
+      &:after {
+        border-color: $color-spotify;
+      }
+
+      .background {
+        background-color: $color-spotify;
+        transform-origin: right;
+      }
     }
-    &:after {
-      border-color: $color-spotify;
+
+    .arrows {
+      right: 100%;
+      transform: scaleX(-100%);
+
+      .arrow {
+        &:before,
+        &:after {
+          background-color: $color-spotify;
+        }
+      }
     }
-  }
-
-  .title {
-    position: relative;
-
-    font-size: $font-size-200;
-    font-weight: $font-weight-300;
-    line-height: 1em;
   }
 }

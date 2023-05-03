@@ -6,15 +6,24 @@ interface Props {
 
 const _ = ({ theme }: Props) => {
   return (
-    <button
+    <div
       className={`${styles.main} ${
         theme == "apple" ? styles.apple : styles.spotify
       }`}
     >
-      <div className={styles.title}>
-        Convert to {theme == "apple" ? "Spotify" : "Apple Music"}
+      <button className={styles.button}>
+        <div className={styles.background} />
+        <div className={styles.title}>
+          Convert to {theme == "apple" ? "Spotify" : "Apple Music"}
+        </div>
+      </button>
+      <div className={styles.arrows}>
+        <div className={styles.arrow} />
+        <div className={styles.arrow} />
+        <div className={styles.arrow} />
+        <div className={styles.arrow} />
       </div>
-    </button>
+    </div>
   );
 };
 

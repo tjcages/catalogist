@@ -33,7 +33,10 @@ const _ = () => {
 
       <div className={style.providers}>
         <div className={style.provider}>
-          <h1>Apple Music</h1>
+          <h1>
+            Apple<br />
+            Music
+          </h1>
           <Button theme="apple" />
         </div>
         <div className={style.provider}>
