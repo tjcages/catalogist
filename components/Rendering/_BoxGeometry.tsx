@@ -1,4 +1,4 @@
- as THREE from "three";
+import * as THREE from "three";
 import { useRef, useMemo, useLayoutEffect } from "react";
 
 function BoxGeometry({ width = 1, height = 1, radius = 0.2, depth = 1 }) {

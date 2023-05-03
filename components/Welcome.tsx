@@ -7,8 +7,6 @@ import {
   PerspectiveCamera,
 } from "@react-three/drei";
 
-import { LayerMaterial, Displace } from "lamina";
-
 const LINE_1 = "Starter Kit";
 const LINE_2 = "Hello World";
 const LINE_3 = "React & NextJS";
@@ -20,40 +18,12 @@ export default function _() {
     <Canvas>
       <PerspectiveCamera position={[0, 0, 50]} makeDefault />
       <Suspense>
-        <Bubble />
         <Typography />
         <Environment preset="warehouse" />
       </Suspense>
     </Canvas>
   );
 }
-
-const Bubble = () => {
-  const ref = useRef(null);
-  const displaceRef = useRef(null) as any;
-
-  const { width } = useThree((state) => state.viewport);
-
-  useFrame(({}, dt) => {
-    if (displaceRef.current) displaceRef.current.offset.x += 4 * dt;
-  });
-
-  return (
-    <mesh ref={ref}>
-      <sphereBufferGeometry args={[width / 6.5, 128, 128]} />
-      <LayerMaterial
-        color={"white"}
-        lighting={"physical"}
-        transmission={1.6}
-        roughness={0}
-        thickness={2.5}
-        toneMapped={false}
-      >
-        <Displace ref={displaceRef} strength={2} scale={0.2} type="simplex" />
-      </LayerMaterial>
-    </mesh>
-  );
-};
 
 const Typography = () => {
   const { width, height } = useThree((state) => state.viewport);

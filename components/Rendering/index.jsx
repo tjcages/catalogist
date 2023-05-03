@@ -6,7 +6,6 @@ import {
   Float,
 } from "@react-three/drei";
 import BoxGeometry from "./_BoxGeometry";
-import Sparks from "./_Sparks"
 
 const _ = () => {
   return (
