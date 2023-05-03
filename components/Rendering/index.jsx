@@ -1,15 +1,15 @@
+import { useRef } from "react";
 import * as THREE from "three";
 import { Canvas, useLoader } from "@react-three/fiber";
-import {
-  ContactShadows,
-  Environment,
-  Float,
-} from "@react-three/drei";
+import { ContactShadows, Environment, Float } from "@react-three/drei";
 import BoxGeometry from "./_BoxGeometry";
+import Particles from "./_Particles";
 
-const _ = () => {
+const _ = ({ mobile, theme }) => {
+  const mouse = useRef([0, 0]);
+
   return (
-    <Canvas shadows orthographic camera={{ position: [0, 1.5, 10], zoom: 180 }}>
+    <Canvas shadows orthographic camera={{ fov: 100, position: [0, 0, 10], zoom: 10 }}>
       {/* <hemisphereLight intensity={0.4} groundColor="white" /> */}
       <directionalLight position={[10, -15, -10]} intensity={0.5} />
       <spotLight
@@ -25,12 +25,15 @@ const _ = () => {
       <Float
         rotationIntensity={1}
         speed={3}
-        position={[0.17, 0.25, 0]}
+        position={[2, 2, 0]}
         rotation={[0, -Math.PI / 2, 0]}
+        scale={22}
       >
         <SpotifyIcon />
         <AppleIcon />
       </Float>
+
+      <Particles count={mobile ? 250 : 500} mouse={mouse} theme={theme} />
 
       <ContactShadows
         resolution={480}
@@ -84,7 +87,7 @@ function AppleIcon(props) {
   return (
     <mesh
       rotation={[0, Math.PI / 2, 0]}
-      position={[-0.3, 0.6, 0.6]}
+      position={[-0.3, 0.7, 0.7]}
       castShadow
       receiveShadow
       {...props}

@@ -2,7 +2,11 @@ import Image from "next/image";
 import style from "@/styles/overlay.module.scss";
 import Button from "@/components/Button";
 
-const _ = () => {
+interface Props {
+  setTheme: (theme: string | null) => void;
+}
+
+const _ = ({ setTheme }: Props) => {
   return (
     <div className={style.underlay}>
       <div className={style.header}>
@@ -34,14 +38,23 @@ const _ = () => {
       <div className={style.providers}>
         <div className={style.provider}>
           <h1>
-            Apple<br />
+            Apple
+            <br />
             Music
           </h1>
-          <Button theme="apple" />
+          <Button
+            theme="apple"
+            onHover={() => setTheme("apple")}
+            onHoverOut={() => setTheme(null)}
+          />
         </div>
         <div className={style.provider}>
           <h1>Spotify</h1>
-          <Button theme="spotify" />
+          <Button
+            theme="spotify"
+            onHover={() => setTheme("spotify")}
+            onHoverOut={() => setTheme(null)}
+          />
         </div>
       </div>
       <div className={style.credits}>
