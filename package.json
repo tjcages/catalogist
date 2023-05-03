@@ -1,5 +1,5 @@
 {
-  "name": "buy-button",
+  "name": "catalogist",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,25 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next-safe/middleware": "^0.10.0",
-    "@radix-ui/react-tooltip": "^1.0.5",
+    "@react-three/drei": "9.65.2",
+    "@react-three/fiber": "^8.13.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.34",
     "@types/react-dom": "18.0.11",
     "@vercel/analytics": "^1.0.0",
     "autoprefixer": "10.4.14",
-    "framer-motion": "^10.12.4",
-    "gsap": "^3.11.5",
+    "framer-motion": "^10.12.7",
+    "meshline": "^3.1.6",
     "next": "13.3.0",
-    "p5": "^1.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-syntax-highlighter": "^15.5.0",
     "sass": "^1.61.0",
     "typescript": "5.0.4"
   },
-  "devDependencies": {
-    "@types/react-syntax-highlighter": "^15.5.6",
-    "@types/three": "^0.150.2"
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }

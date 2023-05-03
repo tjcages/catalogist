@@ -1,36 +1,17 @@
-import styles from "@/styles/home.module.scss";
-import data from "@/data";
-
 import SEO from "@/seo";
-import Guides from "@/components/Guides";
-import Header from "@/components/Header";
-import Stickers from "@/components/Stickers";
-import Intro from "@/components/Intro";
-import Container from "@/components/Container";
-import Item from "@/components/Item";
-import CTA from "@/components/CTA";
-
-const live = false;
+import { useMedia, mobileBreakpoint } from "@/modules/useMedia";
+import Underlay from "@/components/Underlay";
+import Rendering from "@/components/Rendering";
 
 export default function Home() {
+  // const mobile = useMedia(mobileBreakpoint);
   return (
     <>
       <SEO />
 
-      <main className={styles.main}>
-        <Guides />
-        <Stickers live={live} />
-
-        <Header />
-        <div className={styles.container}>
-          <Intro />
-          <Container>
-            {data.map((item, index) => (
-              <Item key={index} {...item} />
-            ))}
-            <CTA />
-          </Container>
-        </div>
+      <main>
+        <Rendering />
+        <Underlay />
       </main>
     </>
   );

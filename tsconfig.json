@@ -18,6 +18,17 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "buttons/BubbleGum/index.tsx", "buttons/BananaSplit/Bananas.jsx", "buttons/BananaSplit/Bananas.jsx", "components/CTA/_Effects.jsx", "components/CTA/_Shader.jsx", "components/CTA/_Vectors.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/Sparks/_Particles.jsx",
+    "components/Sparks/post/Waterpass.jsx",
+    "components/Sparks/post/Glitchpass.jsx",
+    "components/Sparks/_Effects.jsx",
+    "components/Rendering/_Sparks.jsx",
+    "components/Rendering/_Sparks.jsx",
+    "components/Rendering/index.jsx"
+  ],
   "exclude": ["node_modules"]
 }

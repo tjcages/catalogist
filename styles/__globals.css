@@ -1,22 +1,4 @@
-@font-face {
-  font-family: "VCR";
-  src: url("../public/fonts/VCR.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Sohne";
-  src: url("../public/fonts/Sohne/Sohne-Buch.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@property --shift {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 0;
-}
+@import url("https://fonts.googleapis.com/css2?family=Antonio:wght@600&display=swap");
 
 html,
 body {
