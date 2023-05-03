@@ -1,5 +1,5 @@
-import { Suspense, useRef } from "react";
-import { Canvas, useThree, useFrame } from "@react-three/fiber";
+import { Suspense } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import {
   Environment,
   RenderTexture,
