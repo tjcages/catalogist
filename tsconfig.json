@@ -29,6 +29,6 @@
     "components/Rendering/_Sparks.jsx",
     "components/Rendering/_Sparks.jsx",
     "components/Rendering/index.jsx"
-, "components/Rendering/_Particles.jsx"  ],
+, "components/Rendering/_Particles.jsx", "components/Rendering/_AppIcon.jsx"  ],
   "exclude": ["node_modules"]
 }

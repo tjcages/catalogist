@@ -1,15 +1,34 @@
-import { useRef } from "react";
 import * as THREE from "three";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { ContactShadows, Environment, Float } from "@react-three/drei";
-import BoxGeometry from "./_BoxGeometry";
-import Particles from "./_Particles";
+import { Environment } from "@react-three/drei";
+import { useStore } from "@/store";
 
-const _ = ({ mobile, theme }) => {
-  const mouse = useRef([0, 0]);
+import AppIcon from "./_AppIcon";
+import Geo from "./_Geo"
+// import Particles from "./_Particles";
+
+const _ = () => {
+  const preview = useStore((state) => state.preview);
+  const pushPage = useStore((state) => state.pushPage);
+  const previewPage = useStore((state) => state.previewPage);
+
+  const textures = useLoader(THREE.TextureLoader, [
+    "/icons/apple-music.png",
+    "/icons/spotify.png",
+  ]);
+
+  textures.forEach((texture) => {
+    texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
+    texture.repeat.set(1, 1);
+    texture.offset.set(0.5, 0.5);
+  });
 
   return (
-    <Canvas shadows orthographic camera={{ fov: 100, position: [0, 0, 10], zoom: 10 }}>
+    <Canvas
+      shadows
+      orthographic
+      camera={{ fov: 100, position: [0, 0, 10], zoom: 10 }}
+    >
       {/* <hemisphereLight intensity={0.4} groundColor="white" /> */}
       <directionalLight position={[10, -15, -10]} intensity={0.5} />
       <spotLight
@@ -22,20 +41,22 @@ const _ = ({ mobile, theme }) => {
         shadow-bias={-0.000001}
       />
 
-      <Float
-        rotationIntensity={1}
-        speed={3}
-        position={[2, 2, 0]}
-        rotation={[0, -Math.PI / 2, 0]}
-        scale={22}
-      >
-        <SpotifyIcon />
-        <AppleIcon />
-      </Float>
+      <AppIcon
+        texture={textures[0]}
+        hovered={preview == "apple" ? 1 : 0}
+        position={[-0.3, 0.7, 0.7]}
+        onClick={() => pushPage("apple")}
+      />
+      <AppIcon
+        texture={textures[1]}
+        hovered={preview == "spotify" ? 1 : 0}
+        color="#1ED760"
+        onClick={() => pushPage("spotify")}
+      />
+      {/* <Geo /> */}
+      {/* <Particles count={500} theme={preview} /> */}
 
-      <Particles count={mobile ? 250 : 500} mouse={mouse} theme={theme} />
-
-      <ContactShadows
+      {/* <ContactShadows
         resolution={480}
         scale={20}
         position={[0.15, -0.75, 0.1]}
@@ -52,54 +73,10 @@ const _ = ({ mobile, theme }) => {
         opacity={0.75}
         far={1.05}
         color="#1ED760"
-      />
+      /> */}
       <Environment preset="warehouse" />
     </Canvas>
   );
 };
-
-function SpotifyIcon(props) {
-  const spotifyMap = useLoader(THREE.TextureLoader, "/icons/spotify.png");
-
-  spotifyMap.wrapS = spotifyMap.wrapT = THREE.ClampToEdgeWrapping;
-  spotifyMap.repeat.set(1, 1);
-  spotifyMap.offset.set(0.5, 0.5);
-
-  return (
-    <mesh rotation={[0, Math.PI / 2, 0]} castShadow receiveShadow {...props}>
-      <BoxGeometry depth={0.25} />
-      <meshStandardMaterial
-        color="#1ED760"
-        attach="material"
-        map={spotifyMap}
-      />
-    </mesh>
-  );
-}
-
-function AppleIcon(props) {
-  const appleMap = useLoader(THREE.TextureLoader, "/icons/apple-music.png");
-
-  appleMap.wrapS = appleMap.wrapT = THREE.ClampToEdgeWrapping;
-  appleMap.repeat.set(1, 1);
-  appleMap.offset.set(0.5, 0.5);
-
-  return (
-    <mesh
-      rotation={[0, Math.PI / 2, 0]}
-      position={[-0.3, 0.7, 0.7]}
-      castShadow
-      receiveShadow
-      {...props}
-    >
-      <BoxGeometry depth={0.25} />
-      <meshStandardMaterial
-        // color="#FB5C74"
-        attach="material"
-        map={appleMap}
-      />
-    </mesh>
-  );
-}
 
 export default _;

@@ -4,9 +4,10 @@ interface Props {
   theme: "apple" | "spotify";
   onHover: () => void;
   onHoverOut: () => void;
+  onClick: () => void;
 }
 
-const _ = ({ theme, onHover, onHoverOut }: Props) => {
+const _ = ({ theme, onHover, onHoverOut, onClick }: Props) => {
   return (
     <div
       className={`${styles.main} ${
@@ -14,6 +15,7 @@ const _ = ({ theme, onHover, onHoverOut }: Props) => {
       }`}
       onMouseEnter={onHover}
       onMouseLeave={onHoverOut}
+      onClick={() => onClick()}
     >
       <button className={styles.button}>
         <div className={styles.background} />

@@ -1,27 +1,34 @@
 import Image from "next/image";
-import style from "@/styles/overlay.module.scss";
+import { useStore } from "@/store";
+import styles from "@/styles/overlay.module.scss";
 import Button from "@/components/Button";
 
-interface Props {
-  setTheme: (theme: string | null) => void;
-}
+const _ = () => {
+  const page = useStore(
+    (state: { page: "home" | "apple" | "spotify" }) => state.page
+  );
+  const pushPage = useStore((state) => state.pushPage);
+  const previewPage = useStore((state) => state.previewPage);
 
-const _ = ({ setTheme }: Props) => {
   return (
-    <div className={style.underlay}>
-      <div className={style.header}>
-        <p className={style.title}>
+    <div
+      className={`${styles.underlay} ${
+        page == "apple" ? styles.apple : page == "spotify" ? styles.spotify : ""
+      }`}
+    >
+      <div className={styles.header}>
+        <p className={styles.title} onClick={() => pushPage("home")}>
           Catalogist<span>™</span>
         </p>
         <Image
-          className={style.icon}
+          className={styles.icon}
           src="/logo.png"
           alt="logo"
           width={24}
           height={24}
         />
       </div>
-      <div className={style.description}>
+      <div className={styles.description}>
         <p>
           <b>Playlist Converter</b>
           <br />
@@ -29,42 +36,44 @@ const _ = ({ setTheme }: Props) => {
           <br />
           <b>—</b>
         </p>
-        <p className={style.drag}>
+        <p className={styles.drag}>
           • &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           Off–Brand™&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; •
         </p>
       </div>
 
-      <div className={style.providers}>
-        <div className={style.provider}>
-          <h1>
+      <div className={styles.providers}>
+        <div className={styles.provider}>
+          <h1 className={styles.appleTitle}>
             Apple
             <br />
             Music
           </h1>
           <Button
             theme="apple"
-            onHover={() => setTheme("apple")}
-            onHoverOut={() => setTheme(null)}
+            onHover={() => previewPage("apple")}
+            onHoverOut={() => previewPage("home")}
+            onClick={() => pushPage("apple")}
           />
         </div>
-        <div className={style.provider}>
-          <h1>Spotify</h1>
+        <div className={styles.provider}>
+          <h1 className={styles.spotifyTitle}>Spotify</h1>
           <Button
             theme="spotify"
-            onHover={() => setTheme("spotify")}
-            onHoverOut={() => setTheme(null)}
+            onHover={() => previewPage("spotify")}
+            onHoverOut={() => previewPage("home")}
+            onClick={() => pushPage("spotify")}
           />
         </div>
       </div>
-      <div className={style.credits}>
+      <div className={styles.credits}>
         <p>
           <b>Wonders of Antiquity</b>
           <br />
           Pythagorean Mathematics
         </p>
-        <p className={style.title}>THE SUMMIT OF THE MANY</p>
-        <p>David Hume — Cicero — Plato — Shakespeare — Einstein</p>
+        <p className={styles.title}>{page}</p>
+        <p>tylerj</p>
       </div>
     </div>
   );

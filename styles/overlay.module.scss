@@ -13,6 +13,36 @@
   justify-content: flex-start;
   padding: $padding-300;
 
+  user-select: none;
+  pointer-events: none;
+
+  &.apple,
+  &.spotify {
+    .appleTitle,
+    .spotifyTitle {
+      transform: rotateX(25deg) scale(1.2, 1.75);
+    }
+  }
+
+  &.apple {
+    .appleTitle {
+      -webkit-text-fill-color: $color-apple !important;
+    }
+    .spotifyTitle {
+      opacity: 0;
+    }
+  }
+
+  &.spotify {
+    .appleTitle {
+      opacity: 0;
+    }
+    .spotifyTitle {
+      -webkit-text-fill-color: $color-spotify !important;
+      /* background: linear-gradient(270deg, blue 0%, #fa243c 100%); */
+    }
+  }
+
   .header {
     width: 100%;
 
@@ -27,6 +57,9 @@
       font-weight: 700;
       color: $color-800;
       letter-spacing: -2px;
+
+      pointer-events: all;
+      cursor: pointer;
 
       span {
         font-size: 16px;
@@ -79,7 +112,16 @@
       align-items: flex-start;
       gap: $padding-200;
 
-      h1 {
+      pointer-events: all;
+
+      perspective: 1000px;
+
+      &:last-child {
+        align-items: flex-end;
+      }
+
+      .appleTitle,
+      .spotifyTitle {
         font-size: 150px;
         font-weight: 600;
         letter-spacing: -10px;
@@ -88,23 +130,22 @@
         padding-right: 10px;
 
         -webkit-text-fill-color: transparent;
+
+        transform-origin: bottom left;
+        transition: transform $animation-duration-long $animation-easing,
+          opacity $animation-duration-short $animation-easing;
       }
 
-      &:first-child {
-        h1 {
-          background: linear-gradient(270deg, #fb5c74 0%, #fa243c 100%);
-          background-clip: text;
-        }
+      .appleTitle {
+        background: linear-gradient(270deg, #fb5c74 0%, #fa243c 100%);
+        background-clip: text;
       }
 
-      &:last-child {
-        align-items: flex-end;
-        
-        h1 {
-          line-height: 1.3em;
-          background: linear-gradient(45deg, #1ed760 0%, #1ed760 100%);
-          background-clip: text;
-        }
+      .spotifyTitle {
+        line-height: 1.3em;
+        background: linear-gradient(45deg, #1ed760 0%, #1ed760 100%);
+        background-clip: text;
+        transform-origin: bottom right;
       }
     }
   }
@@ -121,6 +162,10 @@
 
     p {
       color: $color-800;
+
+      &:last-child {
+        text-align: right;
+      }
     }
 
     .title {
@@ -131,6 +176,7 @@
       color: $color-800;
       letter-spacing: -0.5;
       white-space: nowrap;
+      text-transform: uppercase;
     }
   }
 }

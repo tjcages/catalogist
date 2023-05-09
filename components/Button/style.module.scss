@@ -3,6 +3,8 @@
 .main {
   position: relative;
 
+  user-select: none;
+
   &:hover {
     .arrows {
       opacity: 1;
@@ -121,6 +123,9 @@
     --color: $color-100;
     opacity: 0;
 
+    user-select: none;
+    pointer-events: none;
+    
     transition: opacity $animation-duration $animation-easing
       $animation-duration;
 

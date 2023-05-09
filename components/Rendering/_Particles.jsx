@@ -35,8 +35,8 @@ export default function Particles({ count, mouse, theme }) {
       const a = Math.cos(t) + Math.sin(t * 1) / 10;
       const b = Math.sin(t) + Math.cos(t * 2) / 10;
       const s = Math.cos(t);
-      particle.mx += (mouse.current[0] - particle.mx) * 0.01;
-      particle.my += (mouse.current[1] * -1 - particle.my) * 0.01;
+      // particle.mx += (mouse.current[0] - particle.mx) * 0.01;
+      // particle.my += (mouse.current[1] * -1 - particle.my) * 0.01;
       // Update the dummy object
       dummy.position.set(
         (particle.mx / 10) * a +

@@ -15,6 +15,8 @@
 
     color: $color_800;
     background: linear-gradient(180deg, #e6eaf5 0%, #f6f6f6 80%);
+
+    transition: background $animation-duration $animation-easing;
   }
 
   h1 {
